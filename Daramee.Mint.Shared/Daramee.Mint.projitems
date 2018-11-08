@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>01bcf3ef-c411-4334-bb58-9ce23e855ebf</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Daramee.Mint</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Collections\ForEachExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collections\ForEachSafeEnumerable.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collections\SpinLockedList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\AudioEmitter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\AudioListener.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\Camera.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\IComponent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\IOrderable.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\IRenderable.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\RectangleRender.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\SpriteRender.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\TextRender.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\Transform2D.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Coroutines\Coroutine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Coroutines\WaitForSeconds.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Diagnostics\ILogWriter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Diagnostics\Logger.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Diagnostics\Writers\DebugLogWriter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Diagnostics\Writers\StreamLogWriter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Entity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\EntityManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\FrameBuffer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\GeometryRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\InputService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mathf.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\FrameRateCalculateProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\IProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Processors\ProcessorManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scenes\ISceneTransitor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scenes\Scene.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scenes\SceneManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Systems\AudioSystem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Systems\ISystem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Systems\SpriteRenderSystem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Systems\SystemManager.cs" />
+  </ItemGroup>
+</Project>
