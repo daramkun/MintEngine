@@ -42,6 +42,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Processors\IProcessor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Processors\ProcessorManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scenes\ISceneTransitor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scenes\LogoScene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scenes\Scene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scenes\SceneManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Systems\AudioSystem.cs" />

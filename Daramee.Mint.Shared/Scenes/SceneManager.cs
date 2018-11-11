@@ -32,23 +32,23 @@ namespace Daramee.Mint.Scenes
 
 		internal void StartScene ()
 		{
-			scene?.Enter ();
+			scene?.InnerEnter ();
 		}
 
 		public void Dispose ()
 		{
-			scene?.Exit ();
+			scene?.InnerExit ();
 			GC.SuppressFinalize ( this );
 		}
 
 		public Scene Transition ( string nextSceneName, bool unloadContents = true )
 		{
-			scene?.Exit ();
+			scene?.InnerExit ();
 			if ( unloadContents )
 				Engine.SharedEngine.Content.Unload ();
 			EntityManager.SharedManager.ClearEntities ();
 			scene = scenes [ nextSceneName ];
-			scene?.Enter ();
+			scene?.InnerEnter ();
 			return scene;
 		}
 	}
