@@ -126,6 +126,15 @@ namespace Daramee.Mint.Input
 		public bool IsGamePadButtonPress ( Buttons button ) => currentGamePadState.IsButtonDown ( button );
 		public bool IsGamePadButtonDown ( Buttons button ) => currentGamePadState.IsButtonDown ( button ) && lastGamePadState.IsButtonUp ( button );
 		public bool IsGamePadButtonUp ( Buttons button ) => currentGamePadState.IsButtonUp ( button ) && lastGamePadState.IsButtonDown ( button );
+		public bool IsAnyGamePadButtonPress ()
+		{
+			return ( currentGamePadState.Buttons.A | currentGamePadState.Buttons.B | currentGamePadState.Buttons.X | currentGamePadState.Buttons.Y
+				| currentGamePadState.Buttons.Back | currentGamePadState.Buttons.Start | currentGamePadState.Buttons.LeftShoulder | currentGamePadState.Buttons.RightShoulder
+				| currentGamePadState.Buttons.LeftStick | currentGamePadState.Buttons.RightStick
+				| currentGamePadState.DPad.Up | currentGamePadState.DPad.Down | currentGamePadState.DPad.Left | currentGamePadState.DPad.Right ) == ButtonState.Pressed
+				|| currentGamePadState.Triggers.Left >= 0.5f || currentGamePadState.Triggers.Right >= 0.5f
+				|| Mathf.Abs ( currentGamePadState.ThumbSticks.Left ).Length () > 0.3f || Mathf.Abs ( currentGamePadState.ThumbSticks.Right ).Length () > 0.3f;
+		}
 
 		public Vector2 RelativeMousePosition => new Vector2 ( currentMouseState.X - lastMouseState.X, currentMouseState.Y - lastMouseState.Y );
 	}

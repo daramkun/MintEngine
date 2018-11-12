@@ -12,7 +12,7 @@ namespace Daramee.Mint.Scenes
 	public abstract class LogoScene : Scene, IProcessor
 	{
 		string [] logoSpriteNames;
-		Queue<Entity> spriteEntities;
+		Queue<Entity> spriteEntities = new Queue<Entity> ();
 
 		bool fadeIn = true;
 		double alphaValue = 0;
@@ -24,6 +24,7 @@ namespace Daramee.Mint.Scenes
 
 		protected override void Enter ()
 		{
+			spriteEntities.Clear ();
 			foreach ( var spriteName in logoSpriteNames )
 			{
 				Entity entity = EntityManager.SharedManager.CreateEntity ();
@@ -50,8 +51,8 @@ namespace Daramee.Mint.Scenes
 			{
 				var sprite = spriteEntities.Peek ().GetComponent<SpriteRender> ();
 
-				alphaValue += 15 * gameTime.ElapsedGameTime.TotalSeconds * ( fadeIn ? 1 : -1 );
-				if ( fadeIn && alphaValue >= 255 )
+				alphaValue += 255 * gameTime.ElapsedGameTime.TotalSeconds * ( fadeIn ? 1 : -1 );
+				if ( fadeIn && alphaValue >= 500 )
 				{
 					fadeIn = false;
 					alphaValue = 255;
@@ -62,7 +63,7 @@ namespace Daramee.Mint.Scenes
 					alphaValue = 0;
 					spriteEntities.Dequeue ();
 				}
-				sprite.OverlayColor = new Color ( 255, 255, 255, ( int ) alphaValue );
+				sprite.OverlayColor = new Color ( 255, 255, 255, ( int ) Math.Min ( alphaValue, 255 ) );
 			}
 			else
 			{

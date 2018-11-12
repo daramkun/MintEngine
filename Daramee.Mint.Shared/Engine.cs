@@ -30,6 +30,7 @@ namespace Daramee.Mint
 		FrameBuffer frameBuffer;
 		bool isCustomSize;
 
+		public GraphicsDeviceManager GraphicsDeviceManager => graphics;
 		public SpriteBatch SpriteBatcher => spriteBatch;
 		public FrameBuffer FrameBuffer => frameBuffer;
 
@@ -126,6 +127,10 @@ namespace Daramee.Mint
 		
 		protected override void Update ( GameTime gameTime )
 		{
+			if ( InputService.SharedInputService.IsKeyPress ( Keys.LeftAlt )
+				&& InputService.SharedInputService.IsKeyUp ( Keys.Enter ) )
+				graphics.ToggleFullScreen ();
+
 			base.Update ( gameTime );
 		}
 		
@@ -145,7 +150,7 @@ namespace Daramee.Mint
 			GraphicsDevice.Clear ( LetterBoxColor );
 			GraphicsDevice.Viewport = new Viewport ( 0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight );
 			
-			spriteBatch.Begin ( SpriteSortMode.Immediate, samplerState: FrameBufferDrawSampler, effect: FrameBufferDrawEffect );
+			spriteBatch.Begin ( SpriteSortMode.Immediate, blendState: BlendState.NonPremultiplied, samplerState: FrameBufferDrawSampler, effect: FrameBufferDrawEffect );
 			spriteBatch.Draw ( frameBuffer.RenderTarget, backBufferArea, Color.White );
 			spriteBatch.End ();
 

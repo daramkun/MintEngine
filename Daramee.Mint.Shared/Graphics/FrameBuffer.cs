@@ -68,7 +68,7 @@ namespace Daramee.Mint.Graphics
 					}
 					renderTargets [ ( int ) scale ] = new RenderTarget2D ( Engine.SharedEngine.GraphicsDevice,
 						( int ) sizeScaled.X, ( int ) sizeScaled.Y, false,
-						SurfaceFormat.Bgr32, DepthFormat.Depth24Stencil8,
+						SurfaceFormat.Bgra32, DepthFormat.Depth24Stencil8,
 						msaaSampleCount, RenderTargetUsage.PlatformContents );
 				}
 				return renderTargets [ ( int ) scale ];
