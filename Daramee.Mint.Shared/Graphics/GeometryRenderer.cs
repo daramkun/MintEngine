@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Daramee.Mint.Graphics
 {
-	class GeometryRenderer : IDisposable
+	public class GeometryRenderer : IDisposable
 	{
 		Texture2D tex;
 
@@ -42,9 +42,8 @@ namespace Daramee.Mint.Graphics
 
 		public void FillRectangle( Rectangle rectangle, Color color, float rotation, Vector2 scale, int sortOrder )
 		{
-			Engine.SharedEngine.SpriteBatcher.Draw ( tex, new Vector2 (), rectangle, color,
-				rotation, scale, new Vector2 (),
-				SpriteEffects.None, sortOrder );
+			Engine.SharedEngine.SpriteBatcher.Draw ( tex, new Vector2 ( rectangle.X, rectangle.Y ), new Rectangle ( 0, 0, 1, 1 ), color,
+				rotation, new Vector2 (), new Vector2 ( rectangle.Width, rectangle.Height ) * scale, SpriteEffects.None, sortOrder );
 		}
 
 		public void DrawLine ( Vector2 p1, Vector2 p2, float weight, Color color, int sortOrder )

@@ -8,8 +8,8 @@ namespace Daramee.Mint.Scenes
 	{
 		public abstract string Name { get; }
 
-		protected virtual void Enter () { }
-		protected virtual void Exit () { }
+		protected abstract void Enter ();
+		protected abstract void Exit ();
 
 		internal void InnerEnter () { Enter (); }
 		internal void InnerExit () { Exit (); }

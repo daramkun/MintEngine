@@ -37,6 +37,8 @@ namespace Daramee.Mint
 		public Color FrameBufferClearColor = Color.CornflowerBlue, LetterBoxColor = new Color ( 32, 32, 32 );
 		public SamplerState FrameBufferDrawSampler = SamplerState.PointClamp;
 		public Effect FrameBufferDrawEffect = null;
+
+		public event EventHandler Initialized;
 		
 		internal Rectangle backBufferArea;
 		internal Vector2 backBufferScaleVector;
@@ -121,6 +123,7 @@ namespace Daramee.Mint
 			
 			SystemManager.SharedManager.RegisterSystem ( new SpriteRenderSystem () );
 			SystemManager.SharedManager.RegisterSystem ( new AudioSystem () );
+			Initialized?.Invoke ( this, EventArgs.Empty );
 
 			SceneManager.SharedManager.StartScene ();
 		}

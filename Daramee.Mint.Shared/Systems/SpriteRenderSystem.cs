@@ -14,7 +14,7 @@ namespace Daramee.Mint.Systems
 	{
 		GeometryRenderer renderer = new GeometryRenderer ();
 
-		public int Order => int.MaxValue;
+		public int Order => int.MaxValue - 256;
 		public bool IsParallelExecution => false;
 
 		public bool IsTarget ( Entity entity ) => ( entity.IsActived && entity.HasComponent<Transform2D> () ) && ( true );
@@ -71,14 +71,28 @@ namespace Daramee.Mint.Systems
 				if ( !rectRender.IsVisible )
 					return;
 				var pos = transform.Position - rectRender.Size / 2;
-				renderer.DrawRectangle (
-					new Rectangle ( 
-						new Point ( ( int ) pos.X, ( int ) pos.Y ),
-						new Point ( ( int ) rectRender.Size.X, ( int ) rectRender.Size.Y )
-					),
-					rectRender.Color,
-					transform.Rotation, transform.Scale,
-					rectRender.SortOrder );
+				if ( rectRender.Fill )
+				{
+					renderer.FillRectangle (
+						new Rectangle (
+							new Point ( ( int ) pos.X, ( int ) pos.Y ),
+							new Point ( ( int ) rectRender.Size.X, ( int ) rectRender.Size.Y )
+						),
+						rectRender.Color,
+						transform.Rotation, transform.Scale,
+						rectRender.SortOrder );
+				}
+				else
+				{
+					renderer.DrawRectangle (
+						new Rectangle (
+							new Point ( ( int ) pos.X, ( int ) pos.Y ),
+							new Point ( ( int ) rectRender.Size.X, ( int ) rectRender.Size.Y )
+						),
+						rectRender.Color,
+						transform.Rotation, transform.Scale,
+						rectRender.SortOrder );
+				}
 			}
 		}
 
