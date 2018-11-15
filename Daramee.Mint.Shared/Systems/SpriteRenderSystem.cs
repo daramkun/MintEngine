@@ -34,7 +34,7 @@ namespace Daramee.Mint.Systems
 			if ( cameraEntity != null )
 			{
 				var transform = cameraEntity.GetComponent<Transform2D> ();
-				cameraMatrix = Matrix.CreateTranslation ( new Vector3 ( transform.Position, 0 ) );
+				cameraMatrix = Matrix.CreateTranslation ( new Vector3 ( -transform.Position, 0 ) );
 			}
 			Engine.SharedEngine.SpriteBatcher.Begin ( samplerState: DrawSampler, blendState: BlendState.NonPremultiplied, transformMatrix: cameraMatrix );
 		}
@@ -45,7 +45,7 @@ namespace Daramee.Mint.Systems
 			if ( entity.HasComponent<SpriteRender> () )
 			{
 				var spriteRender = entity.GetComponent<SpriteRender> ();
-				if ( !spriteRender.IsVisible )
+				if ( !spriteRender.IsVisible || spriteRender.Sprite == null )
 					return;
 				Engine.SharedEngine.SpriteBatcher.Draw ( spriteRender.Sprite,
 					transform.Position - new Vector2 ( spriteRender.Sprite.Width / 2, spriteRender.Sprite.Height / 2 ),

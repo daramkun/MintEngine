@@ -22,6 +22,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Components\IOrderable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\IRenderable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\RectangleRender.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\SpriteAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\SpriteRender.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\TextRender.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Transform2D.cs" />
@@ -34,6 +35,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Engine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Entity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\EntityManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Animation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\FrameBuffer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\GeometryRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\InputService.cs" />
@@ -47,6 +49,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Scenes\SceneManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Systems\AudioSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Systems\ISystem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Systems\SpriteAnimationSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Systems\SpriteRenderSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Systems\SystemManager.cs" />
   </ItemGroup>

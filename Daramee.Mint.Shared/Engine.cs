@@ -120,7 +120,8 @@ namespace Daramee.Mint
 		{
 			spriteBatch = new SpriteBatch ( GraphicsDevice );
 			CalculateBackBufferArea ();
-			
+
+			SystemManager.SharedManager.RegisterSystem ( new SpriteAnimationSystem () );
 			SystemManager.SharedManager.RegisterSystem ( new SpriteRenderSystem () );
 			SystemManager.SharedManager.RegisterSystem ( new AudioSystem () );
 			Initialized?.Invoke ( this, EventArgs.Empty );
