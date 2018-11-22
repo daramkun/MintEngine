@@ -12,6 +12,7 @@ namespace Daramee.Mint.Components
 		public bool Fill;
 		public int SortOrder { get; set; }
 		public bool IsVisible { get; set; }
+		public bool IsCameraIndependency { get; set; }
 
 		public void Initialize ()
 		{

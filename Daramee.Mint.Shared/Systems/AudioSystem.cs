@@ -22,6 +22,8 @@ namespace Daramee.Mint.Systems
 		ConcurrentDictionary<SoundEffectInstance, Components.AudioEmitter> instanceDict
 			= new ConcurrentDictionary<SoundEffectInstance, Components.AudioEmitter> ();
 		List<SoundEffectInstance> removingList = new List<SoundEffectInstance> ();
+
+		internal AudioSystem () { }
 		
 		public void Dispose ()
 		{

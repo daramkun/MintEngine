@@ -7,12 +7,14 @@ using Microsoft.Xna.Framework;
 
 namespace Daramee.Mint.Systems
 {
-	public class SpriteAnimationSystem : ISystem
+	public sealed class SpriteAnimationSystem : ISystem
 	{
 		public bool IsParallelExecution => true;
 		public int Order => 0;
 
 		public bool IsTarget ( Entity entity ) => entity.HasComponent<SpriteAnimation> () && entity.HasComponent<SpriteRender> ();
+
+		internal SpriteAnimationSystem () { }
 
 		public void PreExecute ()
 		{

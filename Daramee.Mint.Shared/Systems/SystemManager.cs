@@ -26,8 +26,8 @@ namespace Daramee.Mint.Systems
 
 		public bool RegisterSystem ( ISystem system )
 		{
-			if ( IsSystemRegistered ( system.GetType () ) )
-				return false;
+			//if ( IsSystemRegistered ( system.GetType () ) )
+			//	return false;
 			systems.Add ( system );
 			return true;
 		}
@@ -41,16 +41,15 @@ namespace Daramee.Mint.Systems
 
 		public IEnumerable<ISystem> GetSystems () => new ForEachSafeEnumerable<ISystem> ( systems, null );
 
-		public ISystem GetSystem ( Type t )
+		public IEnumerable<ISystem> GetSystems ( Type t )
 		{
 			foreach ( ISystem system in systems )
 				if ( system.GetType () == t )
-					return system;
-			return null;
+					yield return system;
 		}
-		public ISystem GetSystem<T> ()
+		public IEnumerable<ISystem> GetSystems<T> ()
 		{
-			return GetSystem ( typeof ( T ) );
+			return GetSystems ( typeof ( T ) );
 		}
 
 		public bool IsSystemRegistered ( Type type )

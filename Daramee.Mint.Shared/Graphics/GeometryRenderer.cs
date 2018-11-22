@@ -8,10 +8,12 @@ namespace Daramee.Mint.Graphics
 {
 	public class GeometryRenderer : IDisposable
 	{
+		SpriteBatch spriteBatch;
 		Texture2D tex;
 
-		public GeometryRenderer ()
+		public GeometryRenderer ( SpriteBatch spriteBatch )
 		{
+			this.spriteBatch = spriteBatch;
 			tex = new Texture2D ( Engine.SharedEngine.GraphicsDevice, 1, 1 );
 			tex.SetData<Color> ( new Color [] { Color.White } );
 		}
@@ -26,23 +28,15 @@ namespace Daramee.Mint.Graphics
 
 		public void DrawRectangle ( Rectangle rectangle, Color color, float rotation, Vector2 scale, int sortOrder )
 		{
-			Engine.SharedEngine.SpriteBatcher.Draw ( tex, new Vector2 (), new Rectangle ( rectangle.X, rectangle.Y, rectangle.Width, 1 ), color,
-				rotation, scale, new Vector2 (),
-				SpriteEffects.None, sortOrder );
-			Engine.SharedEngine.SpriteBatcher.Draw ( tex, new Vector2 (), new Rectangle ( rectangle.X, rectangle.Y, 1, rectangle.Height ), color,
-				rotation, scale, new Vector2 (),
-				SpriteEffects.None, sortOrder );
-			Engine.SharedEngine.SpriteBatcher.Draw ( tex, new Vector2 (), new Rectangle ( rectangle.X + rectangle.Width, rectangle.Y, 1, rectangle.Height ), color,
-				rotation, scale, new Vector2 (),
-				SpriteEffects.None, sortOrder );
-			Engine.SharedEngine.SpriteBatcher.Draw ( tex, new Vector2 (), new Rectangle ( rectangle.X, rectangle.Y + rectangle.Height, rectangle.Width, 1 ), color,
-				rotation, scale, new Vector2 (),
-				SpriteEffects.None, sortOrder );
+			FillRectangle ( new Rectangle ( rectangle.X, rectangle.Y, rectangle.Width, 1 ), color, rotation, scale, sortOrder );
+			FillRectangle ( new Rectangle ( rectangle.X, rectangle.Y, 1, rectangle.Height ), color, rotation, scale, sortOrder );
+			FillRectangle ( new Rectangle ( rectangle.X + rectangle.Width - 1, rectangle.Y, 1, rectangle.Height ), color, rotation, scale, sortOrder );
+			FillRectangle ( new Rectangle ( rectangle.X, rectangle.Y + rectangle.Height - 1, rectangle.Width, 1 ), color, rotation, scale, sortOrder );
 		}
 
 		public void FillRectangle( Rectangle rectangle, Color color, float rotation, Vector2 scale, int sortOrder )
 		{
-			Engine.SharedEngine.SpriteBatcher.Draw ( tex, new Vector2 ( rectangle.X, rectangle.Y ), new Rectangle ( 0, 0, 1, 1 ), color,
+			spriteBatch.Draw ( tex, new Vector2 ( rectangle.X, rectangle.Y ), new Rectangle ( 0, 0, 1, 1 ), color,
 				rotation, new Vector2 (), new Vector2 ( rectangle.Width, rectangle.Height ) * scale, SpriteEffects.None, sortOrder );
 		}
 
@@ -50,8 +44,8 @@ namespace Daramee.Mint.Graphics
 		{
 			Vector2 edge = p2 - p1;
 			float angle = ( float ) Math.Atan2 ( edge.Y, edge.X );
-			
-			Engine.SharedEngine.SpriteBatcher.Draw ( tex,
+
+			spriteBatch.Draw ( tex,
 				new Rectangle ( ( int ) p1.X, ( int ) p2.Y, ( int ) edge.Length (), ( int ) weight ),
 				null, color, angle, new Vector2 ( 0, 0 ), SpriteEffects.None, sortOrder );
 		}

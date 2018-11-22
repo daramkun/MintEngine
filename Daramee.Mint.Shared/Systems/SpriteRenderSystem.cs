@@ -12,14 +12,33 @@ namespace Daramee.Mint.Systems
 {
 	public sealed class SpriteRenderSystem : ISystem, IDisposable
 	{
-		GeometryRenderer renderer = new GeometryRenderer ();
+		SpriteBatch spriteBatch;
+		GeometryRenderer renderer;
+		int order;
+		bool cameraIndependency;
 
-		public int Order => int.MaxValue - 256;
+		public int Order => order;
 		public bool IsParallelExecution => false;
 
-		public bool IsTarget ( Entity entity ) => ( entity.IsActived && entity.HasComponent<Transform2D> () ) && ( true );
+		public bool IsTarget ( Entity entity ) => ( entity.IsActived && entity.HasComponent<Transform2D> () ) && ( entity.HasComponent<SpriteRender> () || entity.HasComponent<TextRender> () || entity.HasComponent<RectangleRender> () );
 
 		public SamplerState DrawSampler = SamplerState.PointClamp;
+
+		internal SpriteRenderSystem ( bool cameraIndependent = false )
+		{
+			if ( !cameraIndependent )
+			{
+				order = int.MaxValue - 256;
+			}
+			else
+			{
+				order = int.MaxValue - 255;
+			}
+			cameraIndependency = cameraIndependent;
+
+			spriteBatch = new SpriteBatch ( Engine.SharedEngine.GraphicsDevice );
+			renderer = new GeometryRenderer ( spriteBatch );
+		}
 
 		public void Dispose ()
 		{
@@ -31,12 +50,12 @@ namespace Daramee.Mint.Systems
 		{
 			var cameraEntity = EntityManager.SharedManager.GetEntitiesByComponent<Camera> ().FirstOrDefault ();
 			Matrix? cameraMatrix = null;
-			if ( cameraEntity != null )
+			if ( cameraEntity != null && !cameraIndependency )
 			{
 				var transform = cameraEntity.GetComponent<Transform2D> ();
 				cameraMatrix = Matrix.CreateTranslation ( new Vector3 ( -transform.Position, 0 ) );
 			}
-			Engine.SharedEngine.SpriteBatcher.Begin ( samplerState: DrawSampler, blendState: BlendState.NonPremultiplied, transformMatrix: cameraMatrix );
+			spriteBatch.Begin ( samplerState: DrawSampler, blendState: BlendState.NonPremultiplied, transformMatrix: cameraMatrix );
 		}
 
 		public void Execute ( Entity entity, GameTime gameTime )
@@ -45,9 +64,11 @@ namespace Daramee.Mint.Systems
 			if ( entity.HasComponent<SpriteRender> () )
 			{
 				var spriteRender = entity.GetComponent<SpriteRender> ();
+				if ( spriteRender.IsCameraIndependency != cameraIndependency )
+					return;
 				if ( !spriteRender.IsVisible || spriteRender.Sprite == null )
 					return;
-				Engine.SharedEngine.SpriteBatcher.Draw ( spriteRender.Sprite,
+				spriteBatch.Draw ( spriteRender.Sprite,
 					transform.Position - new Vector2 ( spriteRender.Sprite.Width / 2, spriteRender.Sprite.Height / 2 ),
 					null, spriteRender.OverlayColor,
 					transform.Rotation, transform.Origin, transform.Scale,
@@ -56,10 +77,12 @@ namespace Daramee.Mint.Systems
 			else if ( entity.HasComponent<TextRender> () )
 			{
 				var textRender = entity.GetComponent<TextRender> ();
+				if ( textRender.IsCameraIndependency != cameraIndependency )
+					return;
 				if ( !textRender.IsVisible )
 					return;
 				var measured = textRender.Font.MeasureString ( textRender.Text );
-				Engine.SharedEngine.SpriteBatcher.DrawString ( textRender.Font, textRender.Text,
+				spriteBatch.DrawString ( textRender.Font, textRender.Text,
 					transform.Position - measured / 2,
 					textRender.ForegroundColor,
 					transform.Rotation, transform.Origin, transform.Scale,
@@ -68,6 +91,8 @@ namespace Daramee.Mint.Systems
 			else if ( entity.HasComponent<RectangleRender> () )
 			{
 				var rectRender = entity.GetComponent<RectangleRender> ();
+				if ( rectRender.IsCameraIndependency != cameraIndependency )
+					return;
 				if ( !rectRender.IsVisible )
 					return;
 				var pos = transform.Position - rectRender.Size / 2;
@@ -98,7 +123,7 @@ namespace Daramee.Mint.Systems
 
 		public void PostExecute ()
 		{
-			Engine.SharedEngine.SpriteBatcher.End ();
+			spriteBatch.End ();
 		}
 	}
 }

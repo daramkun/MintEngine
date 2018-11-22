@@ -31,7 +31,6 @@ namespace Daramee.Mint
 		bool isCustomSize;
 
 		public GraphicsDeviceManager GraphicsDeviceManager => graphics;
-		public SpriteBatch SpriteBatcher => spriteBatch;
 		public FrameBuffer FrameBuffer => frameBuffer;
 
 		public Color FrameBufferClearColor = Color.CornflowerBlue, LetterBoxColor = new Color ( 32, 32, 32 );
@@ -123,6 +122,7 @@ namespace Daramee.Mint
 
 			SystemManager.SharedManager.RegisterSystem ( new SpriteAnimationSystem () );
 			SystemManager.SharedManager.RegisterSystem ( new SpriteRenderSystem () );
+			SystemManager.SharedManager.RegisterSystem ( new SpriteRenderSystem ( true ) );
 			SystemManager.SharedManager.RegisterSystem ( new AudioSystem () );
 			Initialized?.Invoke ( this, EventArgs.Empty );
 
