@@ -21,9 +21,9 @@ namespace Daramee.Mint.Graphics
 
 		public Texture2D GetCurrentImage => Engine.SharedEngine.Content.Load<Texture2D> ( resources.Peek () );
 
-		public void Update ( GameTime gameTime )
+		public void Update ( GameTime gameTime, float speed = 1 )
 		{
-			elapsedTime += gameTime.ElapsedGameTime;
+			elapsedTime += TimeSpan.FromSeconds ( gameTime.ElapsedGameTime.TotalSeconds * speed );
 			if ( elapsedTime >= interval )
 			{
 				resources.Enqueue ( resources.Dequeue () );

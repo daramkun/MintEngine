@@ -23,7 +23,8 @@ namespace Daramee.Mint.Systems
 
 		public void Execute ( Entity entity, GameTime gameTime )
 		{
-			entity.GetComponent<SpriteAnimation> ().Animation?.Update ( gameTime );
+			var animation = entity.GetComponent<SpriteAnimation> ();
+			animation.Animation?.Update ( gameTime, animation.Speed );
 			entity.GetComponent<SpriteRender> ().Sprite = entity.GetComponent<SpriteAnimation> ().Animation.GetCurrentImage;
 		}
 
