@@ -10,6 +10,7 @@ namespace Daramee.Mint
 		public static Vector2 Abs ( Vector2 v ) { return new Vector2 ( Math.Abs ( v.X ), Math.Abs ( v.Y ) ); }
 		public static Vector3 Abs ( Vector3 v ) { return new Vector3 ( Math.Abs ( v.X ), Math.Abs ( v.Y ), Math.Abs ( v.Z ) ); }
 		public static Vector4 Abs ( Vector4 v ) { return new Vector4 ( Math.Abs ( v.X ), Math.Abs ( v.Y ), Math.Abs ( v.Z ), Math.Abs ( v.W ) ); }
+		public static Vector2 Floor ( Vector2 v ) { return new Vector2 ( ( float ) Math.Floor ( v.X ), ( float ) Math.Floor ( v.Y ) ); }
 
 		public static Vector2 CalculateRotatedMovingUnit ( float angle )
 		{
